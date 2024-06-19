@@ -58,7 +58,7 @@ func EjecutoLambda(ctx context.Context, request events.APIGatewayProxyRequest) (
 	}
 
 	// Preparar el contexto con valores relevantes para el procesamiento de la solicitud.
-	path := strings.Replace(request.PathParameters["XGo"], os.Getenv("UrlPrefix"), "", -1)
+	path := strings.Replace(request.PathParameters["xgo"], os.Getenv("UrlPrefix"), "", -1)
 
 	awsgo.Ctx = context.WithValue(awsgo.Ctx, models.Key("path"), path)
 	awsgo.Ctx = context.WithValue(awsgo.Ctx, models.Key("method"), request.HTTPMethod)

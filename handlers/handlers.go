@@ -24,7 +24,7 @@ func Manejadores(ctx context.Context, request events.APIGatewayProxyRequest) mod
 	respuesta.Status = 400
 
 	// Validar la autorización de la solicitud.
-	isOk, statusCode, msg, claim := validoAuthorization(ctx, request)
+	isOk, statusCode, msg, _ := validoAuthorization(ctx, request)
 
 	if !isOk {
 		respuesta.Status = statusCode
