@@ -7,4 +7,4 @@ set GOARCH=amd64
 
 go build main.go
 del main.zip 
-zip -r main.zip main
+tar.exe -a -cf main.zip main
