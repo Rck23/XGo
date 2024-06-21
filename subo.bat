@@ -1,13 +1,14 @@
 git add .
-git commit -m "AWS Prueba3"
+git commit -m "AWS Prueba4"
 git push -u origin main
 
 
 set GOOS=linux
+
 set GOARCH=amd64
-set CGO_ENABLED=0
-go build -tags lambda.norpc -o bootstrap main.go
-ulimx\Go\bin\build-lambda-zip.exe -o main.zip bootstrap
+
+go build -o bootstrap
+go build main.go
 
 del main.zip 
 tar.exe -a -cf main.zip main
