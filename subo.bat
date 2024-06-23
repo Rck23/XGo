@@ -1,5 +1,5 @@
  git add .
- git commit -m "Registro de usuarios"
+ git commit -m "Login realizado"
  git push -u origin main
 
 @REM set GOOS=linux

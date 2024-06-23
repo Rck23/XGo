@@ -25,7 +25,7 @@ func Registro(ctx context.Context) models.ResApi {
 		return r
 	}
 	if len(t.Email) == 0 {
-		r.Message = "Debe especificar el Email"
+		r.Message = "El correo electrónico es obligatorio"
 		fmt.Println(r.Message)
 		return r
 	}
@@ -36,7 +36,7 @@ func Registro(ctx context.Context) models.ResApi {
 	}
 	_, encontrado, _ := bd.ChequeoYaExisteUsuario(t.Email)
 	if encontrado {
-		r.Message = "Ya existe usuario registro con ese email"
+		r.Message = "Ya existe el correo electrónico en la base de datos"
 		fmt.Println(r.Message)
 		return r
 	}
