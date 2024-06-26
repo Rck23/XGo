@@ -11,17 +11,27 @@ import (
 	"github.com/aws/aws-lambda-go/events"
 )
 
+// Manejadores procesa las solicitudes entrantes a la API Gateway basándose en el método HTTP y el path.
+// Primero, valida la autorización utilizando la función validoAuthorization. Si la autorización es válida,
+// procesa la solicitud según el método HTTP y el path especificados. Retorna una respuesta de tipo models.ResApi.
 func Manejadores(ctx context.Context, request events.APIGatewayProxyRequest) models.ResApi {
+
 	fmt.Println("Voy a procesar " + ctx.Value(models.Key("path")).(string) + " > " + ctx.Value(models.Key("method")).(string))
+
+	// Inicializa la respuesta con un estado inicial de 400.
 	var respuesta models.ResApi
 	respuesta.Status = 400
+	// Valida la autorización de la solicitud.
 	isOk, statusCode, msg, claim := validoAuthorization(ctx, request)
 
+	// Si la autorización no es válida, establece el estado y el mensaje de la respuesta y retorna.
 	if !isOk {
 		respuesta.Status = statusCode
 		respuesta.Message = msg
 		return respuesta
 	}
+
+	// Procesa la solicitud basándose en el método HTTP y el path.
 	switch ctx.Value(models.Key("method")).(string) {
 	case "POST":
 		switch ctx.Value(models.Key("path")).(string) {
@@ -51,20 +61,33 @@ func Manejadores(ctx context.Context, request events.APIGatewayProxyRequest) mod
 		}
 		//
 	}
+
+	// Si el método o path no son válidos, establece un mensaje de error en la respuesta.
 	respuesta.Message = "Metodo invalido"
 	return respuesta
 }
-func validoAuthorization(ctx context.Context, request events.APIGatewayProxyRequest) (bool, int, string, models.Claim) {
-	path := ctx.Value(models.Key("path")).(string)
 
-	if path == "registro" || path == "login" || path == "obtenerAvatar" || path == "obtenerBanner" {
+// validoAuthorization valida la autorización de una solicitud entrante.
+// Verifica si el path es uno de los permitidos sin token o si el token de autorización es válido.
+// Retorna un booleano indicando si la autorización es válida, un código de estado, un mensaje y los claims del token.
+func validoAuthorization(ctx context.Context, request events.APIGatewayProxyRequest) (bool, int, string, models.Claim) {
+	// Extrae el path de la solicitud.
+	pathValue := ctx.Value(models.Key("path")).(string)
+
+	// Permite ciertos paths sin token.
+	if pathValue == "registro" || pathValue == "login" || pathValue == "obtenerAvatar" || pathValue == "obtenerBanner" {
 		return true, 200, "", models.Claim{}
 	}
+
+	// Verifica si el token de autorización está presente.
 	token := request.Headers["Authorization"]
 	if len(token) == 0 {
 		return false, 401, "Token requerido", models.Claim{}
 	}
+
+	// Procesa el token de autorización.
 	Claim, todoOK, msg, err := jwt.ProcesoToken(token, ctx.Value(models.Key("jwtSign")).(string))
+
 	if !todoOK {
 		if err != nil {
 			fmt.Println("Error en el token " + err.Error())

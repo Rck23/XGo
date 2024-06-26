@@ -6,6 +6,8 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
+// Usuario representa un usuario en el sistema. Incluye información básica como nombre, apellidos,
+// fecha de nacimiento, email, contraseña, avatar, banner, biografía y ubicación.
 type Usuario struct {
 	ID              primitive.ObjectID `bson:"_id,omitempty" json:"id"`
 	Nombre          string             `bson:"nombre" json:"nombre,omitempty"`

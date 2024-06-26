@@ -1,6 +1,6 @@
- git add .
- git commit -m "Buscar usuario modificar usuario realizado"
- git push -u origin main
+git add .
+git commit -m "Documentado usuarios"
+git push -u origin main
 
 @REM set GOOS=linux
 
