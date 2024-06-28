@@ -41,7 +41,7 @@ func Manejadores(ctx context.Context, request events.APIGatewayProxyRequest) mod
 		case "login":
 			return routers.Login(ctx)
 
-		case "tweet":
+		case "creartweet":
 			return routers.CrearTweet(ctx, claim)
 		}
 		//
@@ -92,7 +92,7 @@ func validoAuthorization(ctx context.Context, request events.APIGatewayProxyRequ
 	}
 
 	// Procesa el token de autorización.
-	Claim, todoOK, msg, err := jwt.ProcesoToken(token, ctx.Value(models.Key("jwtSign")).(string))
+	Claim, todoOK, msg, err := jwt.ProcesoToken(token, ctx.Value(models.Key("jwtsign")).(string))
 
 	if !todoOK {
 		if err != nil {

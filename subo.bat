@@ -1,12 +1,12 @@
 git add .
-git commit -m "Leer y Crear Tweets"
+git commit -m "ERROR Token"
 git push -u origin main
 
 @REM set GOOS=linux
 
 @REM set GOARCH=amd64
 
-go build main.go
+@REM go build main.go
 @REM del main.zip 
 @REM tar.exe -a -cf main.zip main
 
