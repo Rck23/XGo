@@ -41,13 +41,13 @@ func Manejadores(ctx context.Context, request events.APIGatewayProxyRequest) mod
 		case "login":
 			return routers.Login(ctx)
 
-		case "creartweet":
+		case "crearTweet":
 			return routers.CrearTweet(ctx, claim)
 		}
 		//
 	case "GET":
 		switch ctx.Value(models.Key("path")).(string) {
-		case "verperfil":
+		case "verPerfil":
 			return routers.VerPerfil(request)
 
 		case "leerTweets":
@@ -63,7 +63,8 @@ func Manejadores(ctx context.Context, request events.APIGatewayProxyRequest) mod
 		//
 	case "DELETE":
 		switch ctx.Value(models.Key("path")).(string) {
-
+		case "eliminarTweet":
+			return routers.EliminarTweet(request, claim)
 		}
 		//
 	}
