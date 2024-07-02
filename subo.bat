@@ -1,5 +1,5 @@
 git add .
-git commit -m "Fix: Token Bearer Authorization"
+git commit -m "Prueba endpoints"
 git push -u origin main
 
 @REM set GOOS=linux
@@ -10,9 +10,9 @@ git push -u origin main
 @REM del main.zip 
 @REM tar.exe -a -cf main.zip main
 
-@REM set GOOS=linux
-@REM set GOARCH=amd64
-@REM set CGO_ENABLED=0
-@REM del main.zip bootstrap
-@REM go build -tags lambda.norpc -o bootstrap main.go
-@REM %USERPROFILE%\go\bin\build-lambda-zip.exe -o main.zip bootstrap
+set GOOS=linux
+set GOARCH=amd64
+set CGO_ENABLED=0
+del main.zip bootstrap
+go build -tags lambda.norpc -o bootstrap main.go
+%USERPROFILE%\go\bin\build-lambda-zip.exe -o main.zip bootstrap
