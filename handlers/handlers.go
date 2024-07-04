@@ -49,6 +49,10 @@ func Manejadores(ctx context.Context, request events.APIGatewayProxyRequest) mod
 
 		case "subirBanner":
 			return routers.SubirImagen(ctx, request, "B", claim)
+
+		case "crearRelacion":
+			return routers.CrearRelacion(ctx, request, claim)
+
 		}
 		//
 	case "GET":
@@ -64,6 +68,9 @@ func Manejadores(ctx context.Context, request events.APIGatewayProxyRequest) mod
 
 		case "obtenerBanner":
 			return routers.ObtenerImagen(ctx, request, "B", claim)
+
+		case "consultarRelacion":
+			return routers.ConsultarRelacion(request, claim)
 		}
 
 		//
@@ -77,6 +84,9 @@ func Manejadores(ctx context.Context, request events.APIGatewayProxyRequest) mod
 		switch ctx.Value(models.Key("path")).(string) {
 		case "eliminarTweet":
 			return routers.EliminarTweet(request, claim)
+
+		case "eliminarRelacion":
+			return routers.EliminarRelacion(request, claim)
 		}
 		//
 	}

@@ -1,5 +1,5 @@
 git add .
-git commit -m "Prueba endpoints"
+git commit -m "Cread, Borrar y ver Relacion(es)"
 git push -u origin main
 
 @REM set GOOS=linux
