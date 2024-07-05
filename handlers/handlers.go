@@ -71,6 +71,9 @@ func Manejadores(ctx context.Context, request events.APIGatewayProxyRequest) mod
 
 		case "consultarRelacion":
 			return routers.ConsultarRelacion(request, claim)
+
+		case "obtenerUsuarios":
+			return routers.ObtenerUsuarios(request, claim)
 		}
 
 		//
